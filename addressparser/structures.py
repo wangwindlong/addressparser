@@ -13,6 +13,10 @@ class AddrMap(defaultdict):
     def __init__(self):
         super().__init__(lambda: [[], None])
 
+    def __reduce__(self):
+        t = defaultdict.__reduce__(self)
+        return (t[0], ()) + t[2:]
+
     def get_full_name(self, key):
         return self[key][1]
 

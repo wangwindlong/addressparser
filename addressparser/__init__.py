@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 # __init__.py
+import json
 import os
+import pickle
+import _pickle as cPickle
+from collections import defaultdict
 from collections.abc import Iterable
 
 import pandas as pd
@@ -165,12 +169,22 @@ def _fill_province_map(province_map, record_dict):
 
 area_map, city_map, province_area_map, province_map, latlng = _data_from_csv()
 
+# defaultdict 反序列化和序列化 https://mlog.club/article/1456963
+# 自定义defaultdict 序列化和反序列化 https://www.coder.work/article/356672
+tmp = cPickle.dumps(area_map)
+area_map = cPickle.loads(tmp)
+print(area_map)
+print(city_map)
+print(province_area_map)
+print(province_map)
+
 # 直辖市
 munis = {'北京市', '天津市', '上海市', '重庆市'}
 
 
 def is_munis(city_full_name):
-    return city_full_name in munis
+    # return city_full_name in munis
+    return False
 
 
 # 区级到市级的映射
