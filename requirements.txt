@@ -1,5 +1,8 @@
 jieba
 pandas
 elasticsearch>=7.0.0,<8.0.0
+#sudo apt-get install python3-mysqldb
 sqlalchemy
 redis
+flask
+gunicorn

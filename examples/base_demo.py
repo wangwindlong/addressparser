@@ -19,9 +19,10 @@ if __name__ == '__main__':
     df = addressparser.transform(["襄阳市建锦路丽江泊林小区11栋4单元1楼2号",
                                   "浙江嘉兴市浙江嘉兴市浙江嘉兴市海宁市许村镇浙江省海宁市许村镇茗山村徐家石桥1号",
                                   "西城区北苑华贸城"], cut=False)
-    print(df)
+    # print(type(df))
+    # print(df)
     # df = addressparser.transform(location_str, cut=False)
     # # print(df)
     #
-    # for map_key in zip(df["省"], df["市"], df["区"], df["地址"]):
-    #     print(map_key)
+    for map_key in zip(df["省"], df["市"], df["区"], df["地址"]):
+        print(list(map_key))
