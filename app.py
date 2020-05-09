@@ -16,9 +16,13 @@ def index():
 @app.route('/parse', methods=['POST'])
 def parseaddress():
     data = request.get_json()
-    # print("parseaddress data={}".format(data))
-    df = addressparser.transform(data)
     result = []
+    # print("parseaddress data={}".format(data))
+    try:
+        df = addressparser.transform(data)
+    except Exception as e:
+        print("parseaddress exception", e)
+        return json.dumps(result, ensure_ascii=False)
     for map_key in zip(df["省"], df["市"], df["区"], df["地址"]):
         result.append(list(map_key))
     return json.dumps(result, ensure_ascii=False)

@@ -1,7 +1,9 @@
 jieba
 pandas
 elasticsearch>=7.0.0,<8.0.0
-#sudo apt-get install python3-mysqldb
+#sudo apt-get install python3-mysqldb libmysqlclient-dev
+pymsql
+mysqlclient
 sqlalchemy
 redis
 flask

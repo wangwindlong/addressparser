@@ -165,7 +165,7 @@ def _fill_province_map(province_map, record_dict):
             province_map['澳门'] = sheng
 
 
-r = redis.Redis(host='127.0.0.1', port=6379, password='N2vip_net', db=0)
+r = redis.Redis(host='192.168.0.148', port=6379, password='N2vip_net', db=0)
 area_map = r.get("area_map")
 city_map = r.get("city_map")
 province_area_map = r.get("province_area_map")
