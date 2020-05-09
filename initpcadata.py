@@ -12,5 +12,5 @@ df.insert(0, 'country', '中国')
 df['lat'] = '22.415455296546437'
 df['lng'] = '107.35732203836824'
 df.rename(columns={'province': 'sheng', 'city': 'shi', 'county': 'qu'}, inplace=True)
-df.to_csv("addressparser/pca2.csv", sep=',', encoding='utf-8', index=False)
+df.to_csv("addressparser/pca.csv", sep=',', encoding='utf-8', index=False)
 print(df)

@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 # __init__.py
-import json
 import os
-import pickle
 import _pickle as cPickle
-from collections import defaultdict
 from collections.abc import Iterable
 
 import pandas as pd
 
 from .structures import AddrMap, Pca
 from .structures import P, C, A
+import redis
 
 __version__ = "0.1.8"
 
@@ -167,12 +165,25 @@ def _fill_province_map(province_map, record_dict):
             province_map['澳门'] = sheng
 
 
-area_map, city_map, province_area_map, province_map, latlng = _data_from_csv()
-
+r = redis.Redis(host='192.168.0.148', port=6379, password='N2vip_net', db=0)
+area_map = r.get("area_map")
+city_map = r.get("city_map")
+province_area_map = r.get("province_area_map")
+province_map = r.get("province_map")
 # defaultdict 反序列化和序列化 https://mlog.club/article/1456963
 # 自定义defaultdict 序列化和反序列化 https://www.coder.work/article/356672
-tmp = cPickle.dumps(area_map)
-area_map = cPickle.loads(tmp)
+if not area_map or not city_map or not province_area_map or not province_map:
+    area_map, city_map, province_area_map, province_map, latlng = _data_from_csv()
+    r.set("area_map", cPickle.dumps(area_map))
+    r.set("city_map", cPickle.dumps(city_map))
+    r.set("province_area_map", cPickle.dumps(province_area_map))
+    r.set("province_map", cPickle.dumps(province_map))
+else:
+    area_map = cPickle.loads(area_map)
+    city_map = cPickle.loads(city_map)
+    province_area_map = cPickle.loads(province_area_map)
+    province_map = cPickle.loads(province_map)
+
 print(area_map)
 print(city_map)
 print(province_area_map)
