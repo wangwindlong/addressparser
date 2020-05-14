@@ -10,8 +10,8 @@ df = pd.read_sql_query(sql1, engine)
 df.drop_duplicates(subset=['city', 'county'], inplace=True)
 # df['tmp'] = df['city'] + '|' + df['county']
 df.insert(0, 'country', '中国')
-df['lat'] = '22.415455296546437'
-df['lng'] = '107.35732203836824'
+df['lat'] = '0.0'
+df['lng'] = '0.0'
 df.rename(columns={'province': 'sheng', 'city': 'shi', 'county': 'qu'}, inplace=True)
 df.to_csv("addressparser/pca.csv", sep=',', encoding='utf-8', index=False)
 print(df)

@@ -18,6 +18,8 @@ def parseaddress():
     data = request.get_json()
     result = []
     # print("parseaddress data={}".format(data))
+    if not data:
+        return json.dumps(result, ensure_ascii=False)
     try:
         df = addressparser.transform(data)
     except Exception as e:
